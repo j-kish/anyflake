@@ -69,7 +69,7 @@ Notice:
 Contributing
 ------------
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/anyflake.
+Bug reports and pull requests are welcome on GitHub at https://github.com/jkishimoto/anyflake.
 
 
 ## License
