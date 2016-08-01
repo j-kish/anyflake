@@ -1,7 +1,7 @@
-Pure ruby independent ID generator like the SnowFlake, ChiliFlake
+Pure ruby independent ID generator like the Snowflake, ChiliFlake
 =================================================================
 
-This is ID generator like the SnowFlake and ChiliFlake that implemented by pure ruby.
+This is ID generator like the Snowflake and ChiliFlake that implemented by pure ruby.
 
 
 Installation

@@ -1,6 +1,6 @@
 require "anyflake/version"
 
-# Pure ruby independent ID generator like the SnowFlake, ChiliFlake.
+# Pure ruby independent ID generator like the Snowflake, ChiliFlake.
 # @see https://github.com/twitter/snowflake
 # @see https://github.com/ma2shita/chiliflake
 class AnyFlake
