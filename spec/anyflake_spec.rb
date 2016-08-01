@@ -35,6 +35,29 @@ describe Anyflake do
     end
   end
 
+  context 'max params' do
+    it '#next_id' do
+      node_id  = (1 << AnyFlake::NODE_ID_BITS) - 1
+      sequence = (1 << AnyFlake::SEQUENCE_BITS) - 2 # for incremented in next_id function
+      max_time = (1 << AnyFlake::TIMESTAMP_BITS) - 1
+      allow_any_instance_of(AnyFlake).to receive(:current_time).and_return(max_time)
+
+      anyflake = AnyFlake.new(@target_epoch, node_id, sequence)
+      flake_id = anyflake.next_id
+      sequence += 1 # for incremented in next_id function
+      parsed = anyflake.parse(flake_id)
+      expect(parsed[:epoch_time]).to eq max_time - @target_epoch
+      expect(parsed[:time]).to eq Time.at(max_time / 1000.0)
+      expect(parsed[:node_id]).to eq node_id
+      expect(parsed[:sequence]).to eq sequence
+
+      # flake_id: 3069074810819575807
+      # parsed[:time].instance_eval { '%s.%03d' % [strftime('%Y/%m/%d %H:%M:%S'), (usec / 1000.0).round] } => 2039/09/08 00:47:35.551
+
+      allow_any_instance_of(AnyFlake).to receive(:current_time).and_return(@current_time)
+    end
+  end
+
   context 'errors' do
     it 'overflow node_id' do
       expect { AnyFlake.new(@target_epoch, 1024, 0) }.to raise_error AnyFlake::OverflowError
